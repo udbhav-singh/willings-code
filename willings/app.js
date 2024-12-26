@@ -12,7 +12,7 @@ app.post("/recipes", (req, res) => {
   const { title, making_time, serves, ingredients, cost } = req.body;
 
   if (!title || !making_time || !serves || !ingredients || !cost) {
-    return res.status(400).json({
+    return res.status(200).json({
       message: "Recipe creation failed!",
       required: "title, making_time, serves, ingredients, cost",
     });
@@ -30,7 +30,7 @@ app.post("/recipes", (req, res) => {
   };
 
   recipes.push(newRecipe);
-  res.status(201).json({
+  res.status(200).json({
     message: "Recipe successfully created!",
     recipe: [newRecipe],
   });
@@ -55,7 +55,7 @@ app.get("/recipes/:id", (req, res) => {
   const recipe = recipes.find((r) => r.id === parseInt(req.params.id));
 
   if (!recipe) {
-    return res.status(404).json({ message: "No recipe found" });
+    return res.status(200).json({ message: "No recipe found" });
   }
 
   res.status(200).json({
@@ -70,7 +70,7 @@ app.patch("/recipes/:id", (req, res) => {
   const recipe = recipes.find((r) => r.id === parseInt(req.params.id));
 
   if (!recipe) {
-    return res.status(404).json({ message: "No recipe found" });
+    return res.status(200).json({ message: "No recipe found" });
   }
 
   if (title) recipe.title = title;
@@ -91,7 +91,7 @@ app.delete("/recipes/:id", (req, res) => {
   const recipeIndex = recipes.findIndex((r) => r.id === parseInt(req.params.id));
 
   if (recipeIndex === -1) {
-    return res.status(404).json({ message: "No recipe found" });
+    return res.status(200).json({ message: "No recipe found" });
   }
 
   recipes.splice(recipeIndex, 1);
@@ -100,7 +100,7 @@ app.delete("/recipes/:id", (req, res) => {
 
 // Handle other endpoints
 app.use((req, res) => {
-  res.status(404).json({ message: "Not Found" });
+  res.status(200).json({ message: "Not Found" });
 });
 
 // Start the server

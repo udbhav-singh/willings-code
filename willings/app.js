@@ -100,7 +100,7 @@ app.delete("/recipes/:id", (req, res) => {
 
 // Handle other endpoints
 app.use((req, res) => {
-  res.status(200).json({ message: "Not Found" });
+  res.status(404).json({ message: "Not Found" });
 });
 
 // Start the server
